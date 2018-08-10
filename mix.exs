@@ -37,7 +37,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [
       # TODO bump to 1.4 on release
-      {:phoenix, github: "arkgil/phoenix", override: true},
+      {:phoenix, github: "arkgil/phoenix", branch: "telemetry", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
@@ -47,7 +47,8 @@ defmodule Rumbl.Mixfile do
       {:jason, "~> 1.0"},
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 4.1"},
-      {:pbkdf2_elixir, "~> 0.12"}
+      {:pbkdf2_elixir, "~> 0.12"},
+      {:telemetry, github: "elixir-telemetry/telemetry"}
     ]
   end
 
