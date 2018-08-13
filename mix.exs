@@ -6,9 +6,9 @@ defmodule Rumbl.Mixfile do
       app: :rumbl,
       version: "0.1.0",
       elixir: "~> 1.5",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
     ]
@@ -24,11 +24,12 @@ defmodule Rumbl.Mixfile do
       extra_applications: [:logger, :runtime_tools]
     ]
   end
+
   # END:extra-apps
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
@@ -36,7 +37,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [
       # TODO bump to 1.4 on release
-      {:phoenix, github: "phoenixframework/phoenix", override: true},
+      {:phoenix, github: "arkgil/phoenix", branch: "telemetry", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
@@ -47,6 +48,7 @@ defmodule Rumbl.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},
+      {:telemetry, github: "elixir-telemetry/telemetry"}
     ]
   end
 

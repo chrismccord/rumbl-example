@@ -7,12 +7,26 @@ defmodule Rumbl.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
+
+    TelemetryStatsD.start(
+      "statsd_reporter",
+      &Rumbl.Metrics.translate/3,
+      [
+        [:phoenix, :controller, :render, :start],
+        [:phoenix, :controller, :render, :stop],
+        [:phoenix, :controller, :call, :start],
+        [:phoenix, :controller, :call, :stop]
+      ],
+      hostname: "localhost",
+      port: 8125
+    )
+
     children = [
       # Start the Ecto repository
       Rumbl.Repo,
       # Start the endpoint when the application starts
       RumblWeb.Endpoint,
-      RumblWeb.Presence,
+      RumblWeb.Presence
       # Starts a worker by calling: Rumbl.Worker.start_link(arg)
       # {Rumbl.Worker, arg},
     ]
